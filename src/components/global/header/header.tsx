@@ -18,6 +18,10 @@ const Header: FC = () => {
       title: "Quotes",
       path: "/quotes",
     },
+    {
+      title: "Search",
+      path: "/search",
+    },
   ]
 
   return (
