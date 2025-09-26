@@ -2,7 +2,7 @@
 
 import React, { FC, useState } from "react";
 import styles from "./bookList.module.css";
-import QuoteGen from "@/components/quoteGen/quoteGen";
+import QuoteGen from "@/components/quote/quoteGen/quoteGen";
 import { Book } from "@/types/books";
 
 
