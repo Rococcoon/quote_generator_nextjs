@@ -7,6 +7,9 @@
   min-height: 100vh;
   padding: 2rem;
   width: 100%;
+  @media (max-width: 640px) {
+    padding: 12px 12px;
+  }
 }
 
 .quoteCard {
@@ -24,6 +27,9 @@
   padding: 2rem;
   text-align: center;
   width: 100%;
+  @media (max-width: 640px) {
+    padding: 12px 12px;
+  }
 }
 
 .title {

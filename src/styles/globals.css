@@ -59,4 +59,7 @@ main {
   min-height: 100vh;
   padding: 56px 56px;
   width: 100%;
+  @media (max-width: 640px) {
+    padding: 48px 12px;
+  }
 }

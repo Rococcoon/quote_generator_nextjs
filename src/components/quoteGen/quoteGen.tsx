@@ -3,20 +3,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styles from "./quoteGen.module.css";
 import { Book } from "@/types/books";
+import { fetchBookText, parseBookText } from "@/utils/dataHandlers";
 
 type AppState = 'LOADING' | 'SUCCESS' | 'ERROR';
-
 type Quote = string;
 
 type QuoteGenProps = {
   book: Book;
-};
-
-const simpleParseBookText = (bookText: string): Quote[] => {
-  return bookText
-    .split(/(?<=[.?!])\s+/)
-    .filter(quote => quote.length > 50 && quote.length < 500)
-    .map(q => q.trim());
 };
 
 const QuoteGen: React.FC<QuoteGenProps> = ({ book }) => {
@@ -28,33 +21,30 @@ const QuoteGen: React.FC<QuoteGenProps> = ({ book }) => {
 
   const handleNewQuote = useCallback(() => {
     if (quotes.length === 0) return;
-
     const randomQuoteIndex = Math.floor(Math.random() * quotes.length);
     setCurrentQuote(quotes[randomQuoteIndex]);
   }, [quotes]);
 
   useEffect(() => {
-    const filePath = `/${bookSlug}.txt`;
-
-    const fetchAndParseBook = async () => {
+    const fetchAndParse = async () => {
       setAppState('LOADING');
+
       try {
-        const response = await fetch(filePath);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const text = await response.text();
-        const parsedQuotes = simpleParseBookText(text);
+        const text = await fetchBookText(bookSlug);
+
+        const parsedQuotes = parseBookText(text);
 
         setQuotes(parsedQuotes);
         setAppState('SUCCESS');
+
       } catch (error) {
-        console.error(`Could not fetch or parse the book at ${filePath}:`, error);
+        console.error(`Could not fetch or parse the book at /${bookSlug}.txt:`, error);
         setAppState('ERROR');
       }
     };
 
-    fetchAndParseBook();
+    fetchAndParse();
+
   }, [bookSlug]);
 
   useEffect(() => {
@@ -67,7 +57,7 @@ const QuoteGen: React.FC<QuoteGenProps> = ({ book }) => {
     switch (appState) {
       case 'LOADING':
         return (
-          <div>Loading **{title}**...</div>
+          <div>Loading {title}...</div>
         );
       case 'ERROR':
         return (
