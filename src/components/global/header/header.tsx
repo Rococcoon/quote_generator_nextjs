@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styles from "./header.module.css";
+import Link from 'next/link';
 
 type NavLinks = {
   title: string;
@@ -17,23 +18,11 @@ const Header: FC = () => {
       title: "Quotes",
       path: "/quotes",
     },
-    // {
-    //   title: "Form",
-    //   path: "/form",
-    // },
-    // {
-    //   title: "Filter",
-    //   path: "/filter",
-    // },
-    // {
-    //   title: "Hover",
-    //   path: "/hover",
-    // },
   ]
 
   return (
     <header className={styles.headerContainer}>
-      <h1>Moby Dick</h1>
+      <h1><Link href="/">QUOTES!!!</Link></h1>
       <nav>
         <ul className={styles.navUl}>
           {links.map((link) => (
