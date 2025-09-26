@@ -5,7 +5,7 @@ import QuoteGen from "@/components/quoteGen/quoteGen";
 export default function Home() {
   return (
     <main className={styles.main}>
-      <QuoteGen />
+      <QuoteGen bookSlug="moby-dick" />
     </main>
   );
 }
