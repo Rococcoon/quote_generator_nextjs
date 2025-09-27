@@ -1,0 +1,16 @@
+.quoteBox {
+  background-color: var(--background);
+  border-left: 4px solid var(--secondary);
+  border-radius: 8px;
+  color: var(--foreground);
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.6;
+  list-style: none;
+  padding: 1rem 1.5rem;
+  margin: 1rem;
+}
+
+.quoteBox p {
+  margin: 0;
+}
