@@ -51,7 +51,7 @@ const BookList: FC = () => {
     <div>
       {listState === true ? (
         <div>
-          <h1>Select Your Book!</h1>
+          <h1>Select Your Book Generate Random Quotes!</h1>
           <ul className={styles.bookList}>
             {books.map((book) => {
               return (

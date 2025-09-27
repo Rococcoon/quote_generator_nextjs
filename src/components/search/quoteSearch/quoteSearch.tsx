@@ -5,6 +5,7 @@ import styles from "./quoteSearch.module.css";
 import { Book } from "@/types/books";
 import { fetchBookText, parseBookText, sleep } from "@/utils/dataHandlers";
 import { Quote } from "@/types/books";
+import SearchList from "@/components/search/searchList/searchList";
 
 type AppState = 'LOADING' | 'SUCCESS' | 'ERROR';
 
@@ -97,16 +98,7 @@ const QuoteSearch: React.FC<QuoteGenProps> = ({ book }) => {
                 placeholder="Search..."
               />
             </form>
-            <ul>
-              {filteredQuotes.map((quote, i) => (
-                <li
-                  className={styles.quoteBox}
-                  key={i}
-                >
-                  {quote.quote}
-                </li>
-              ))}
-            </ul>
+            <SearchList quotes={filteredQuotes} />
           </div>
         );
     }
