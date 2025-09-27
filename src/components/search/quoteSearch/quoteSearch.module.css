@@ -23,7 +23,7 @@
   gap: 20px;
   min-height: 400px;
   justify-content: space-between;
-  max-width: 600px;
+  max-width: 400px;
   padding: 2rem;
   text-align: center;
   width: 100%;
@@ -50,12 +50,6 @@
   color: var(--accent);
 }
 
-.chapterTitle {
-  font-size: 1rem;
-  font-style: italic;
-  font-weight: bold;
-}
-
 .quoteBox {
   background-color: var(--background);
   border-left: 4px solid var(--secondary);
@@ -64,28 +58,43 @@
   font-size: 1.3rem;
   font-style: italic;
   line-height: 1.6;
+  list-style: none;
   padding: 1rem 1.5rem;
+  margin: 1rem;
 }
 
 .quoteBox p {
   margin: 0;
 }
 
-.generateButton {
-  background-color: var(--primary);
-  border: none;
-  border-radius: 9999px;
-  color: var(--background);
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 12px 24px;
-  transition:
-    background-color 0.2s ease,
-    transform 0.2s ease;
+.searchForm {
+  align-items: center;
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  padding: 24px;
 }
 
-.generateButton:hover {
-  background-color: var(--accent);
-  transform: scale(1);
+.searchForm input,
+.searchForm textarea {
+  background-color: var(--overlay);
+  border: 1px solid var(--muted);
+  border-radius: 5px;
+  color: var(--text);
+  font-family: sans-serif;
+  font-weight: bold;
+  padding: 10px;
+  transition: border-color 0.3s ease;
+}
+
+.searchForm input:focus,
+.searchForm textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.searchForm label {
+  color: var(--text);
+  font-family: sans-serif;
+  font-weight: bold;
 }

@@ -4,9 +4,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styles from "./quoteGen.module.css";
 import { Book } from "@/types/books";
 import { fetchBookText, parseBookText } from "@/utils/dataHandlers";
+import { Quote } from "@/types/books";
 
 type AppState = 'LOADING' | 'SUCCESS' | 'ERROR';
-type Quote = string;
 
 type QuoteGenProps = {
   book: Book;
@@ -22,7 +22,7 @@ const QuoteGen: React.FC<QuoteGenProps> = ({ book }) => {
   const handleNewQuote = useCallback(() => {
     if (quotes.length === 0) return;
     const randomQuoteIndex = Math.floor(Math.random() * quotes.length);
-    setCurrentQuote(quotes[randomQuoteIndex]);
+    setCurrentQuote(quotes[randomQuoteIndex].quote);
   }, [quotes]);
 
   useEffect(() => {
