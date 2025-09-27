@@ -37,6 +37,11 @@ const BookList: FC = () => {
     }
   ]
 
+  /*
+   * function to handle click on book links
+   * sets list state to false and sets the current book
+   * setCurrentBook is used to render the new component
+   */
   const handleListItemClick = (book: Book) => {
     setListState(false);
     setCurBook(book);
@@ -76,7 +81,6 @@ const BookList: FC = () => {
       )}
     </div >
   );
-
 }
 
 export default BookList;

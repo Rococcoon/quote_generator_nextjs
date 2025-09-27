@@ -19,12 +19,23 @@ const QuoteGen: React.FC<QuoteGenProps> = ({ book }) => {
   const [currentQuote, setCurrentQuote] = useState<string>('');
   const [appState, setAppState] = useState<AppState>('LOADING');
 
+  /*
+   * Function to handle new quote button click
+   * it gets a random quote from the quotes array then 
+   * sets the currentQuote to it
+   */
   const handleNewQuote = useCallback(() => {
     if (quotes.length === 0) return;
     const randomQuoteIndex = Math.floor(Math.random() * quotes.length);
     setCurrentQuote(quotes[randomQuoteIndex].quote);
   }, [quotes]);
 
+  /*
+   * this useEffect function fetchs the .txt file based on the bookSlug 
+   * passed to the component
+   * it then parses the string into an array of quotes
+   * it then sets the quotes array to the parsed array of quotes
+   */
   useEffect(() => {
     const fetchAndParse = async () => {
       setAppState('LOADING');
@@ -47,17 +58,24 @@ const QuoteGen: React.FC<QuoteGenProps> = ({ book }) => {
 
   }, [bookSlug]);
 
+  /*
+   * sets a new quote whenever the state changes
+   * this is so there is always a quote displayed
+   */
   useEffect(() => {
     if (appState === 'SUCCESS' && quotes.length > 0) {
       handleNewQuote();
     }
   }, [appState, quotes.length, handleNewQuote]);
 
+  /*
+   * determin what to render based on the appstate
+   */
   const renderContent = () => {
     switch (appState) {
       case 'LOADING':
         return (
-          <div>Loading {title}...</div>
+          <div className={styles.loadingText}>Loading {title}...</div>
         );
       case 'ERROR':
         return (

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from "./quoteSearch.module.css";
 import { Book } from "@/types/books";
-import { fetchBookText, parseBookText } from "@/utils/dataHandlers";
+import { fetchBookText, parseBookText, sleep } from "@/utils/dataHandlers";
 import { Quote } from "@/types/books";
 
 type AppState = 'LOADING' | 'SUCCESS' | 'ERROR';
@@ -19,6 +19,12 @@ const QuoteSearch: React.FC<QuoteGenProps> = ({ book }) => {
   const [filteredQuotes, setFilteredQuotes] = useState<Quote[]>([]);
   const [appState, setAppState] = useState<AppState>('LOADING');
 
+  /*
+   * This useEffect runs when the component is passed its parameters
+   * The function fetches the .txt file based on the bookSlug
+   * It parses the .txt into an array of quotes
+   * It then sets the quotes and filteredQuotes state to the array of quotes
+   */
   useEffect(() => {
     const fetchAndParse = async () => {
       setAppState('LOADING');
@@ -27,6 +33,8 @@ const QuoteSearch: React.FC<QuoteGenProps> = ({ book }) => {
         const text = await fetchBookText(bookSlug);
 
         const parsedQuotes = parseBookText(text);
+
+        await sleep(2000);
 
         setQuotes(parsedQuotes);
         setFilteredQuotes(parsedQuotes);
@@ -42,6 +50,11 @@ const QuoteSearch: React.FC<QuoteGenProps> = ({ book }) => {
 
   }, [bookSlug]);
 
+  /*
+   * This function takes the input from the form element for searching
+   * It the uses the input to filter the FilteredQuotes array and set
+   * the new filteredQuotes array to the filtered content
+   */
   const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const newSearchTerm: string = event.target.value;
@@ -51,11 +64,15 @@ const QuoteSearch: React.FC<QuoteGenProps> = ({ book }) => {
     ));
   }
 
+  /*
+   * This function returns jsx to be rendered in the browser based on the 
+   * state of the appstate of the component
+   */
   const renderContent = () => {
     switch (appState) {
       case 'LOADING':
         return (
-          <div>Loading {title}...</div>
+          <div className={styles.loadingText}>Loading {title}...</div>
         );
       case 'ERROR':
         return (
